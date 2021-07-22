@@ -8,6 +8,8 @@ import { RetiroDepositoComponent } from './components/retiro-deposito/retiro-dep
 import { ConsultaComponent } from './components/consulta/consulta.component';
 import { MonitorComponent } from './components/monitor/monitor.component';
 import { CorteComponent } from './components/corte/corte.component';
+import { DetalleComponent } from './pages/detalle/detalle.component';
+import { CapturaComponent } from './pages/captura/captura.component';
 
 const routes: Routes = [  
     { path: "inicio",component: InicioComponent},
@@ -18,6 +20,8 @@ const routes: Routes = [
     { path: "consultar",component: ConsultaComponent},
     { path: "monitor",component: MonitorComponent},
     { path: "corte",component: CorteComponent},
+    { path: "detalle",component: DetalleComponent},
+    { path: "captura",component: CapturaComponent},
     { path:"**", component:InicioComponent },
     { path: "", pathMatch: "full", redirectTo: "inicio" }
 ];

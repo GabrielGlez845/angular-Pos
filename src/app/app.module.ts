@@ -8,6 +8,7 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 //http
 import {HttpClientModule} from '@angular/common/http';
+//components
 import { ComedorComponent } from './components/comedor/comedor.component';
 import { PlataformaComponent } from './components/plataforma/plataforma.component';
 import { RapidoComponent } from './components/rapido/rapido.component';
@@ -15,6 +16,15 @@ import { RetiroDepositoComponent } from './components/retiro-deposito/retiro-dep
 import { MonitorComponent } from './components/monitor/monitor.component';
 import { CorteComponent } from './components/corte/corte.component';
 import { ConsultaComponent } from './components/consulta/consulta.component';
+//material
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTabsModule} from '@angular/material/tabs';
+
+//
+import { DetalleComponent } from './pages/detalle/detalle.component';
+import { CapturaComponent } from './pages/captura/captura.component';
 
 @NgModule({
   declarations: [
@@ -28,12 +38,18 @@ import { ConsultaComponent } from './components/consulta/consulta.component';
     RetiroDepositoComponent,
     MonitorComponent,
     CorteComponent,
-    ConsultaComponent
+    ConsultaComponent,
+    DetalleComponent,
+    CapturaComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

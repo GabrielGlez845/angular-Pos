@@ -1,1 +1,72 @@
-<p>monitor works!</p>
+<section class="full-width pageContent">
+    <section class="full-width header-well">
+        <div class="full-width header-well-icon">
+            <i class="fab fa-sellsy"></i>
+        </div>
+        <div class="full-width header-well-text">
+            <p class="text-condensedLight">
+                Monitor
+            </p>
+        </div>
+    </section>
+
+    <div class="mdl-tabs__panel is-active" id="tabNewPayment">
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
+                <div class="full-width panel mdl-shadow--2dp">
+                    <div class="full-width panel-content">
+                        <form>
+                            <div class="mdl-grid">
+                                <div class="mdl-cell mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
+
+                                    <div class="mdl-textfield mdl-js-textfield">
+                                        <input type="date" class="mdl-textfield__input">
+                                    </div>
+                                    <div class="mdl-textfield mdl-js-textfield">
+                                        <select class="mdl-textfield__input">
+                                            <option value="" disabled="" selected="">Turno</option>
+                                            <option value="">Active</option>
+                                            <option value="">deactivated</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <button mat-raised-button color="primary">Ventas</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
+
+            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width">
+                <thead>
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric">Clave</th>
+                        <th>Descripcion</th>
+                        <th>Venta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">1</td>
+                        <td>Comedor</td>
+                        <td>$0.00</td>
+                    </tr>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">2</td>
+                        <td>Plataforma</td>
+                        <td>$0.00</td>
+                    </tr>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">3</td>
+                        <td>Rapido</td>
+                        <td>$0.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
