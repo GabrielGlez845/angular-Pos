@@ -1,11 +1,11 @@
 <section class="full-width pageContent">
     <section class="full-width header-well">
         <div class="full-width header-well-icon">
-            <i class="zmdi zmdi-truck"></i>
+            <i class="fas fa-lemon"></i>
         </div>
         <div class="full-width header-well-text">
             <p class="text-condensedLight">
-                Plataforma
+                Insumos
             </p>
         </div>
     </section>
@@ -15,18 +15,19 @@
             <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width">
                 <thead>
                     <tr>
-                        <th class="mdl-data-table__cell--non-numeric">No.Cuenta</th>
-                        <th>Estado</th>
-                        <th>Cliente</th>
-                        <th>Opciones</th>
+                        <th class="mdl-data-table__cell--non-numeric">Entradas</th>
+                        <th>Salidas</th>
+                        <th>opciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="mdl-data-table__cell--non-numeric">1</td>
-                        <td>Jacob</td>
-                        <td>Jacob</td>
-                        <td> <button mat-raised-button color="primary" (click)="verDetalle()">Detalle</button></td>
+                        <td class="mdl-data-table__cell--non-numeric">100</td>
+                        <td>100</td>
+                        <td>
+                            <button class="boton" mat-raised-button>Editar</button>
+                            <button class="boton" mat-raised-button color="warn">Eliminar</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

@@ -1,37 +1,79 @@
 <section class="full-width pageContent">
     <section class="full-width header-well">
         <div class="buttons">
-            <button class="boton" mat-raised-button>Capurar</button>
-            <button class="boton" mat-raised-button>Cancelar Prod</button>
+            <button class="boton" (click)="Capturar()" mat-raised-button>Capturar</button>
             <button class="boton" mat-raised-button>Desc gnral</button>
             <button class="boton" mat-raised-button>Dividir cuenta</button>
             <button class="boton" mat-raised-button>Pagar cuenta</button>
             <button class="boton" mat-raised-button>Imprimir cuenta</button>
-            <button class="boton" mat-raised-button color="warn">Regresar</button>
+            <button class="boton" (click)="Regresar()" mat-raised-button color="warn">Regresar</button>
         </div>
     </section>
     <div class="full-width divider-menu-h mb-5"></div>
     <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
+            <div class="t-responsive">
+                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width">
+                    <thead>
+                        <tr>
+                            <th class="mdl-data-table__cell--non-numeric">Cantidad</th>
+                            <th>Clave</th>
+                            <th>Descripcion</th>
+                            <th>Precio</th>
+                            <th>Desc</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let detalle of detalleCuenta">
+                            <td class="mdl-data-table__cell--non-numeric">{{detalle.cantidad}}</td>
+                            <td>{{detalle.id}}</td>
+                            <td>{{detalle.producto_id}}</td>
+                            <td>${{detalle.precio}}</td>
+                            <td>{{detalle.descuento}}%</td>
+                            <td (click)="detallesEliminar( detalle.id )">
+                                <div class="form-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <input type="checkbox" aria-label="Checkbox for following text input" [checked]="!checkSeleccionado">
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="sinValores" class="alert alert-warning mt-3" role="alert">
+                Esta cuenta no tiene productos asignados, Captura productos
+            </div>
+            <div *ngIf="false">
+                <div class="mt-5">
+                    <h5>Cliente</h5>
+                </div>
+                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width">
+                    <thead>
+                        <tr>
+                            <th class="mdl-data-table__cell--non-numeric">No.Cuenta</th>
+                            <th>Estado</th>
+                            <th>Cliente</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric">1</td>
+                            <td>Jacob</td>
+                            <td>Jacob</td>
+                            <td> <button mat-raised-button color="primary">Detalle</button></td>
+                        </tr>
+                    </tbody>
+                </table>
 
-            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width">
-                <thead>
-                    <tr>
-                        <th class="mdl-data-table__cell--non-numeric">No.Cuenta</th>
-                        <th>Estado</th>
-                        <th>Opciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="mdl-data-table__cell--non-numeric">1</td>
-                        <td>Jacob</td>
-                        <td> <button mat-raised-button color="primary">Detalle</button></td>
-                    </tr>
-                </tbody>
-            </table>
+            </div>
+
             <div class="example-button-container contenedor">
-                <button mat-fab color="warn" class="botonF1">
+                <button mat-fab color="warn" class="botonF1" (click)="cancelarProductos()">
                     <mat-icon>delete</mat-icon>
                  </button>
             </div>

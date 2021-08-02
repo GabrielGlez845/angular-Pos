@@ -12,7 +12,7 @@
     <div class="full-width divider-menu-h mb-5"></div>
     <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
-            <button mat-flat-button style="margin-right: 1%;" color="primary">Simple</button>
+            <button (click)="corteCaja()" mat-flat-button style="margin-right: 1%;" color="primary">Simple</button>
             <button mat-flat-button color="accent">Completa</button>
             <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width">
                 <thead>
@@ -20,15 +20,13 @@
                         <th class="mdl-data-table__cell--non-numeric">Entradas</th>
                         <th>Salidas</th>
                         <th>Total</th>
-                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="mdl-data-table__cell--non-numeric">11/04/2016</td>
-                        <td>Client name</td>
-                        <td>Client name</td>
-                        <td><button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-more"></i></button></td>
+                        <td class="mdl-data-table__cell--non-numeric">{{this.entrada}}</td>
+                        <td>{{this.salida}}</td>
+                        <td>{{this.total}}</td>
                     </tr>
                 </tbody>
             </table>

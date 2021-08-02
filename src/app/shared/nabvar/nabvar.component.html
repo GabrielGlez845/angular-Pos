@@ -5,13 +5,13 @@
         <div class="mdl-tooltip" for="btn-menu">Menu</div>
         <nav class="navBar-options-list">
             <ul class="list-unstyle">
-                <li class="notifications" id="notifications">
-                    <i class="far fa-clock"></i>
+                <li class="notifications" id="notifications" [class.not-active]="turno_abierto">
+                    <a class="nav-link" role="button" data-toggle="modal" data-target="#exampleModalAbrir"><i class="far fa-clock"></i></a>
                     <div class="mdl-tooltip" for="notifications">Abrir turno</div>
                 </li>
-                <li class="btn-exit" id="btn-exit">
-                    <i class="fas fa-clock"></i>
-                    <div class="mdl-tooltip" for="btn-exit">Cerrar turno</div>
+                <li class="notifications" id="notifications2" [class.not-active]="!turno_abierto">
+                    <a class="nav-link" role="button" data-toggle="modal" data-target="#exampleModalCerrar"><i class="fas fa-clock"></i></a>
+                    <div class="mdl-tooltip" for="notifications2">Cerrar turno</div>
                 </li>
                 <li class="text-condensedLight noLink"><small>User Name</small></li>
                 <li class="noLink">
@@ -24,4 +24,95 @@
     </div>
 </div>
 
-<app-sidebar></app-sidebar>
+<app-sidebar [turno_abierto]="turno_abierto"></app-sidebar>
+
+<!-- Modal Abrir Turno -->
+<div class="modal fade" id="exampleModalAbrir" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Abrir Turno</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <form autocomplete="off" [formGroup]="TurnoAbiertoFormGroup" (ngSubmit)="abrirTurno()">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Fondo inicial:</label>
+                        <input type="text" class="form-control" formControlName="apertura" [class.is-invalid]="aperturaNovalida">
+                        <small *ngIf="aperturaNovalida" class="text-danger">
+                           Ingrese solo numeros positivos
+                         </small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" (click)="abrirTurno()" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Cerrar Turno -->
+<div class="modal fade" id="exampleModalCerrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Cerrar Turno</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <div class="forms">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Clave</th>
+                                <th scope="col">Descripcion</th>
+                                <th scope="col">Importe</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">EF</th>
+                                <td>Efectivo</td>
+                                <td>---</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">TAR</th>
+                                <td>Tarjeta</td>
+                                <td>---</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <form autocomplete="off" [formGroup]="TurnoCerradoFormGroup" (ngSubmit)="cerrarTurno()">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Efectivo:</label>
+                        <input type="text" class="form-control" placeholder="cantidad" formControlName="efectivo" [class.is-invalid]="efectivoNovalido">
+                        <small *ngIf="efectivoNovalido" class="text-danger">
+                            Ingrese solo numeros positivos
+                          </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Tarjeta:</label>
+                        <input type="text" class="form-control" id="recipient-name" placeholder="cantidad" formControlName="tarjeta" [class.is-invalid]="tarjetaNovalida">
+                        <small *ngIf="tarjetaNovalida" class="text-danger">
+                            Ingrese solo numeros positivos
+                          </small>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" (click)="cerrarTurno()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>

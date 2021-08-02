@@ -1,3 +1,13 @@
 .white {
     color: whitesmoke !important;
 }
+
+.not-active {
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.4;
+}
+
+.nav-link {
+    padding: 0% !important;
+}

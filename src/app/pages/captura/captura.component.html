@@ -5,14 +5,25 @@
             <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
                 <form action="#">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-                        <label class="mdl-button mdl-js-button mdl-button--icon" for="searchProduct">
-                                <i class="zmdi zmdi-search"></i>
-                            </label>
-                        <div class="mdl-textfield__expandable-holder">
-                            <input class="mdl-textfield__input" type="text" id="searchProduct">
-                            <label class="mdl-textfield__label"></label>
+                        <div class="row">
+                            <div class="col-xl-10 col-lg-8 col-sm-6">
+                                <label class="mdl-button mdl-js-button mdl-button--icon" for="searchProduct">
+                                        <i class="zmdi zmdi-search"></i>
+                                </label>
+                                <div class="mdl-textfield__expandable-holder">
+                                    <input class="mdl-textfield__input" type="text" id="searchProduct">
+                                    <label class="mdl-textfield__label"></label>
+                                </div>
+
+
+                            </div>
+                            <div class="col-xl-2 col-lg-4 col-sm-6">
+                                <button class="boton mdl-button" mat-raised-button color="warn" (click)="Regresar()">Regresar</button>
+                            </div>
                         </div>
                     </div>
+
+
                 </form>
                 <div class="row">
                     <div class="col-lg-4" style="padding: 22px 0;">
@@ -21,26 +32,27 @@
                                 <table class="table mdl-shadow--2dp mdl-js-data-table">
                                     <thead>
                                         <tr>
-                                            <th>No.Cuenta</th>
-                                            <th>Estado</th>
+                                            <th class="mdl-data-table__cell--non-numeric">Cantidad</th>
+                                            <th>Descripcion</th>
+                                            <th>Importe</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th>1</th>
-                                            <td>Jacob</td>
+                                        <tr *ngFor="let platillo of listaPlatillos">
+                                            <th class="mdl-data-table__cell--non-numeric">{{platillo.cantidad}}</th>
+                                            <td>{{platillo.nombre}}</td>
+                                            <td>${{platillo.precio_venta}}</td>
                                             <td>
-                                                detalle
+                                                <button class="btn btn-danger mr-1" (click)="borrarPlatillo(platillo)">Borrar</button>
                                             </td>
                                         </tr>
-
                                     </tbody>
                                 </table>
                                 <hr>
                                 <div class="total">
-                                    <h5 class="last">Total:</h5>
-                                    <button mat-raised-button color="primary">Confirmar cuenta</button>
+                                    <h5 class="last">Total: ${{total}}</h5>
+                                    <button mat-raised-button color="primary" (click)="confirmarCuenta()">Confirmar cuenta</button>
                                 </div>
                             </div>
                         </div>
@@ -48,67 +60,23 @@
                     <div class="full-width text-center col-lg-8" style="padding: 30px 0;">
                         <nav class="full-width menu-categories mb-3">
                             <ul class="list-unstyle text-center">
-                                <li><a href="#!">Category 1</a></li>
-                                <li><a href="#!">Category 2</a></li>
-                                <li><a href="#!">Category 3</a></li>
-                                <li><a href="#!">Category 4</a></li>
+                                <li><a href="#!">Favoritos</a></li>
+                                <li><a href="#!">Alimentos</a></li>
+                                <li><a href="#!">Bebidas</a></li>
+                                <li><a href="#!">Categorias</a></li>
                             </ul>
                         </nav>
-                        <div class="mdl-card mdl-shadow--2dp full-width product-card">
+                        <div class="mdl-card mdl-shadow--2dp full-width product-card cursor" *ngFor="let platillo of platillos" (click)="agregarPlatillo(platillo)">
                             <div class="mdl-card__title">
                                 <img src="assets/img/fontLogin.jpg" alt="product" class="img-responsive">
                             </div>
                             <div class="mdl-card__supporting-text">
                                 <small>Stock</small><br>
-                                <small>Category</small>
+                                <small>Category</small><br>
+                                <small>${{platillo.precio_venta}}</small>
                             </div>
                             <div class="mdl-card__actions mdl-card--border">
-                                Product name
-                                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                                    <i class="zmdi zmdi-more"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="mdl-card mdl-shadow--2dp full-width product-card">
-                            <div class="mdl-card__title">
-                                <img src="assets/img/fontLogin.jpg" alt="product" class="img-responsive">
-                            </div>
-                            <div class="mdl-card__supporting-text">
-                                <small>Stock</small><br>
-                                <small>Category</small>
-                            </div>
-                            <div class="mdl-card__actions mdl-card--border">
-                                Product name
-                                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                                    <i class="zmdi zmdi-more"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="mdl-card mdl-shadow--2dp full-width product-card">
-                            <div class="mdl-card__title">
-                                <img src="assets/img/fontLogin.jpg" alt="product" class="img-responsive">
-                            </div>
-                            <div class="mdl-card__supporting-text">
-                                <small>Stock</small><br>
-                                <small>Category</small>
-                            </div>
-                            <div class="mdl-card__actions mdl-card--border">
-                                Product name
-                                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                                    <i class="zmdi zmdi-more"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="mdl-card mdl-shadow--2dp full-width product-card">
-                            <div class="mdl-card__title">
-                                <img src="assets/img/fontLogin.jpg" alt="product" class="img-responsive">
-                            </div>
-                            <div class="mdl-card__supporting-text">
-                                <small>Stock</small><br>
-                                <small>Category</small>
-                            </div>
-                            <div class="mdl-card__actions mdl-card--border">
-                                Product name
+                                {{platillo.nombre}}
                                 <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="zmdi zmdi-more"></i>
                                 </button>

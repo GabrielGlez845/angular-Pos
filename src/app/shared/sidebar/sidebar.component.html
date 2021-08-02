@@ -21,8 +21,8 @@
         </div>
         <nav class="full-width">
             <ul class="full-width list-unstyle menu-principal">
-                <li class="full-width" routerLinkActive="active">
-                    <a [routerLink]="['/inicio']" class="full-width">
+                <li class="full-width">
+                    <a [routerLink]="['/inicio']" class="full-width" routerLinkActive="active">
                         <div class="navLateral-body-cl">
                             <i class="zmdi zmdi-view-dashboard"></i>
                         </div>
@@ -33,18 +33,18 @@
                 </li>
                 <li class="full-width divider-menu-h"></li>
                 <li class="full-width">
-                    <a class="full-width btn-subMenu">
+                    <a class="full-width btn-subMenu cursor">
                         <div class="navLateral-body-cl">
                             <i class="zmdi zmdi-case"></i>
                         </div>
                         <div class="navLateral-body-cr hide-on-tablet">
-                            PO
+                            Punto de venta
                         </div>
                         <span class="zmdi zmdi-chevron-left"></span>
                     </a>
                     <ul class="full-width menu-principal sub-menu-options">
-                        <li class="full-width">
-                            <a [routerLink]="['/comedor']" class="full-width btn-mover">
+                        <li class="full-width" [class.not-active]="!turno_abierto">
+                            <a [routerLink]="['/comedor']" class="full-width btn-mover" routerLinkActive="active">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-utensils"></i>
                                 </div>
@@ -53,8 +53,8 @@
                                 </div>
                             </a>
                         </li>
-                        <li class="full-width">
-                            <a [routerLink]="['/plataforma']" class="full-width btn-mover">
+                        <li class="full-width" [class.not-active]="!turno_abierto">
+                            <a [routerLink]="['/plataforma']" class="full-width btn-mover" routerLinkActive="active">
                                 <div class="navLateral-body-cl">
                                     <i class="zmdi zmdi-truck"></i>
                                 </div>
@@ -63,8 +63,8 @@
                                 </div>
                             </a>
                         </li>
-                        <li class="full-width">
-                            <a [routerLink]="['/rapido']" class="full-width btn-mover" id="btn-mover">
+                        <li class="full-width" [class.not-active]="!turno_abierto">
+                            <a [routerLink]="['/rapido']" class="full-width btn-mover" routerLinkActive="active" id="btn-mover">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-hamburger"></i>
                                 </div>
@@ -73,8 +73,8 @@
                                 </div>
                             </a>
                         </li>
-                        <li class="full-width">
-                            <a [routerLink]="['/retiro']" class="full-width btn-mover" id="btn-mover">
+                        <li class="full-width" [class.not-active]="!turno_abierto">
+                            <a [routerLink]="['/retiro']" class="full-width btn-mover" routerLinkActive="active" id="btn-mover">
                                 <div class="navLateral-body-cl">
                                     <i class="zmdi zmdi-card"></i>
                                 </div>
@@ -83,8 +83,8 @@
                                 </div>
                             </a>
                         </li>
-                        <li class="full-width">
-                            <a [routerLink]="['/consultar']" class="full-width btn-mover" id="btn-mover">
+                        <li class="full-width" [class.not-active]="!turno_abierto">
+                            <a [routerLink]="['/consultar']" class="full-width btn-mover" routerLinkActive="active" id="btn-mover">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-search"></i>
                                 </div>
@@ -93,8 +93,8 @@
                                 </div>
                             </a>
                         </li>
-                        <li class="full-width">
-                            <a [routerLink]="['/monitor']" class="full-width btn-mover" id="btn-mover">
+                        <li class="full-width" [class.not-active]="!turno_abierto">
+                            <a [routerLink]="['/monitor']" class="full-width btn-mover" routerLinkActive="active" id="btn-mover">
                                 <div class="navLateral-body-cl">
                                     <i class="fab fa-sellsy"></i>
                                 </div>
@@ -103,13 +103,57 @@
                                 </div>
                             </a>
                         </li>
-                        <li class="full-width">
-                            <a [routerLink]="['/corte']" class="full-width btn-mover" id="btn-mover">
+                        <li class="full-width" [class.not-active]="!turno_abierto">
+                            <a [routerLink]="['/corte']" class="full-width btn-mover" routerLinkActive="active" id="btn-mover">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-cash-register"></i>
                                 </div>
                                 <div class="navLateral-body-cr hide-on-tablet">
                                     CORTE DE CAJA
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="full-width divider-menu-h"></li>
+                <li class="full-width">
+                    <a class="full-width btn-subMenu cursor">
+                        <div class="navLateral-body-cl">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="navLateral-body-cr hide-on-tablet">
+                            Inventario
+                        </div>
+                        <span class="zmdi zmdi-chevron-left"></span>
+                    </a>
+                    <ul class="full-width menu-principal sub-menu-options">
+                        <li class="full-width" [class.not-active]="!turno_abierto">
+                            <a [routerLink]="['/articulos']" class="full-width btn-mover" routerLinkActive="active">
+                                <div class="navLateral-body-cl">
+                                    <i class="fas fa-boxes"></i>
+                                </div>
+                                <div class="navLateral-body-cr hide-on-tablet">
+                                    ARTICULOS
+                                </div>
+                            </a>
+                        </li>
+                        <li class="full-width" [class.not-active]="!turno_abierto">
+                            <a [routerLink]="['/platillos']" class="full-width btn-mover" routerLinkActive="active">
+                                <div class="navLateral-body-cl">
+                                    <i class="fas fa-list-alt"></i>
+                                </div>
+                                <div class="navLateral-body-cr hide-on-tablet">
+                                    PLATILLOS
+                                </div>
+                            </a>
+                        </li>
+                        <li class="full-width" [class.not-active]="!turno_abierto">
+                            <a [routerLink]="['/insumos']" class="full-width btn-mover" routerLinkActive="active" id="btn-mover">
+                                <div class="navLateral-body-cl">
+                                    <i class="fas fa-lemon"></i>
+                                </div>
+                                <div class="navLateral-body-cr hide-on-tablet">
+                                    INSUMOS
                                 </div>
                             </a>
                         </li>

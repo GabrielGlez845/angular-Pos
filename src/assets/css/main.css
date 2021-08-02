@@ -459,6 +459,7 @@ body {
     /*box-shadow: 0 0px 15px rgba(0,0,0,.4);*/
     border-right: 1px solid #E1E1E1;
     transition: all .3s ease-in-out;
+    position: fixed;
 }
 
 .navLateral-change {

@@ -8,6 +8,7 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 //http
 import {HttpClientModule} from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 //components
 import { ComedorComponent } from './components/comedor/comedor.component';
 import { PlataformaComponent } from './components/plataforma/plataforma.component';
@@ -22,9 +23,17 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
 
-//
+//Graficas
+//import { ChartsModule } from 'ng2-charts';
+
+
+//Componentes
 import { DetalleComponent } from './pages/detalle/detalle.component';
 import { CapturaComponent } from './pages/captura/captura.component';
+import { GraficaComponent } from './shared/grafica/grafica.component';
+import { ArticulosComponent } from './components/articulos/articulos.component';
+import { PlatillosComponent } from './components/platillos/platillos.component';
+import { InsumosComponent } from './components/insumos/insumos.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +50,10 @@ import { CapturaComponent } from './pages/captura/captura.component';
     ConsultaComponent,
     DetalleComponent,
     CapturaComponent,
+    GraficaComponent,
+    ArticulosComponent,
+    PlatillosComponent,
+    InsumosComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +62,10 @@ import { CapturaComponent } from './pages/captura/captura.component';
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
-    MatTabsModule
+    MatTabsModule,
+    FormsModule,
+    ReactiveFormsModule
+ //   ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

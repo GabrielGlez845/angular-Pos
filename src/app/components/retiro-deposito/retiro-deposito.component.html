@@ -20,25 +20,30 @@
                                 Deposito
                             </div>
                             <div class="full-width panel-content">
-                                <form>
+                                <form autocomplete="off" [formGroup]="DepositoFormGroup" (ngSubmit)="deposito('Deposito')">
                                     <h5 class="text-condensedLight">Nuevo Deposito</h5>
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <input class="mdl-textfield__input" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NamePayment">
+                                        <input class="mdl-textfield__input" formControlName="concepto" [class.is-invalid]="conceptoNovalido1" type="text" id="NamePayment">
                                         <label class="mdl-textfield__label" for="NamePayment">Concepto</label>
-                                        <span class="mdl-textfield__error">Invalid name</span>
+                                        <small *ngIf="conceptoNovalido1" class="text-danger">
+                                            Este cuadro no puede estar vacio
+                                          </small>
                                     </div>
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="descriptionPayment">
+                                        <input class="mdl-textfield__input" formControlName="importe" [class.is-invalid]="importeNovalido1" type="text" id="descriptionPayment">
                                         <label class="mdl-textfield__label" for="descriptionPayment">Importe</label>
-                                        <span class="mdl-textfield__error">Invalid description</span>
+                                        <small *ngIf="importeNovalido1" class="text-danger">
+                                            Ingrese solo numeros positivos
+                                          </small>
                                     </div>
-                                    <p class="text-center">
-                                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addPayment">
-                                            <i class="zmdi zmdi-plus"></i>
-                                        </button>
-                                        <div class="mdl-tooltip" for="btn-addPayment">Agregar deposito</div>
 
                                 </form>
+
+                                <p class="text-center">
+                                    <button (click)="deposito('Deposito')" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addPayment">
+                                        <i class="zmdi zmdi-plus"></i>
+                                    </button>
+                                    <div class="mdl-tooltip" for="btn-addPayment">Agregar deposito</div>
                             </div>
                         </div>
                     </div>
@@ -54,32 +59,37 @@
                                 Retiro
                             </div>
                             <div class="full-width panel-content">
-                                <form>
+                                <form autocomplete="off" [formGroup]="RetiroFormGroup" (ngSubmit)="retiro('Retiro')">
                                     <h5 class="text-condensedLight">Nuevo Retiro</h5>
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <input class="mdl-textfield__input" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NamePayment">
+                                        <input class="mdl-textfield__input" formControlName="concepto" [class.is-invalid]="conceptoNovalido" type="text" id="NamePayment">
                                         <label class="mdl-textfield__label" for="NamePayment">Concepto</label>
-                                        <span class="mdl-textfield__error">Invalid name</span>
+                                        <small *ngIf="conceptoNovalido" class="text-danger">
+                                            Este cuadro no puede estar vacio
+                                          </small>
                                     </div>
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="descriptionPayment">
+                                        <input class="mdl-textfield__input" formControlName="importe" [class.is-invalid]="importeNovalido" type="text" id="descriptionPayment">
                                         <label class="mdl-textfield__label" for="descriptionPayment">Importe</label>
-                                        <span class="mdl-textfield__error">Invalid description</span>
+                                        <small *ngIf="importeNovalido" class="text-danger">
+                                            Ingrese solo numeros positivos
+                                          </small>
                                     </div>
-                                    <p class="text-center">
-                                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addPayment">
-                                            <i class="zmdi zmdi-plus"></i>
-                                        </button>
-                                        <div class="mdl-tooltip" for="btn-addPayment">Agregar Retiro</div>
-
                                 </form>
+
+                                <p class="text-center">
+                                    <button (click)="retiro('Retiro')" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addPayment">
+                                        <i class="zmdi zmdi-plus"></i>
+                                    </button>
+                                    <div class="mdl-tooltip" for="btn-addPayment">Agregar Retiro</div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </mat-tab>
-        <mat-tab label="Lista">
+        <!--<mat-tab label="Lista">
             <div class="mdl-tabs__panel" id="tabListPayment">
                 <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
@@ -132,6 +142,6 @@
                     </div>
                 </div>
             </div>
-        </mat-tab>
+        </mat-tab>-->
     </mat-tab-group>
 </section>

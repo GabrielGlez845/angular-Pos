@@ -15,24 +15,31 @@
             <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
                 <div class="full-width panel mdl-shadow--2dp">
                     <div class="full-width panel-content">
-                        <form>
+                        <form autocomplete="off" [formGroup]="ConsultarFormGroup" (ngSubmit)="consultarCuenta()">
                             <div class="mdl-grid">
                                 <div class="mdl-cell mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
 
                                     <div class="mdl-textfield mdl-js-textfield">
-                                        <input type="date" class="mdl-textfield__input">
+                                        <label for="recipient-name" class="col-form-label">Fecha</label>
+                                        <input type="date" class="mdl-textfield__input" formControlName="fecha" [class.is-invalid]="fechaNovalida">
+                                        <small *ngIf="fechaNovalida" class="text-danger">
+                                            Elija una fecha
+                                           </small>
                                     </div>
-                                    <div class="mdl-textfield mdl-js-textfield">
-                                        <select class="mdl-textfield__input">
-                                            <option value="" disabled="" selected="">Select status</option>
-                                            <option value="">Active</option>
-                                            <option value="">deactivated</option>
-                                        </select>
+                                    <div class="forms mt-2 mb-3">
+                                        <label for="recipient-name" class="col-form-label">Categoria</label>
+                                        <select class="form-control form-control-sm" formControlName="categoria" [class.is-invalid]="categoriaNovalido">
+                                        <option>Comedor</option>
+                                        <option>Domicilio</option>
+                                        <option>Rapido</option>
+                                      </select>
+                                        <small *ngIf=" categoriaNovalido" class="text-danger">                                        
+                                      </small>
                                     </div>
                                 </div>
                             </div>
-                            <button mat-raised-button color="primary">Buscar</button>
                         </form>
+                        <button mat-raised-button color="primary" (click)="consultarCuenta()">Buscar</button>
                     </div>
                 </div>
             </div>
@@ -46,16 +53,17 @@
                     <tr>
                         <th class="mdl-data-table__cell--non-numeric">No.Cuenta</th>
                         <th>Estado</th>
+                        <th>Detalle</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="mdl-data-table__cell--non-numeric">1</td>
-                        <td>Jacob</td>
+                    <tr *ngFor="let cuenta of cuentas">
+                        <td class="mdl-data-table__cell--non-numeric">{{cuenta.id}}</td>
+                        <td>{{cuenta.estado_id}}</td>
+                        <td><a style="cursor: pointer;" (click)="verCuenta( cuenta.id )">Detalle</a></td>
                         <td>
-                            <button style="margin-right: 1%;" mat-raised-button color="warn">Estado</button>
-                            <button mat-raised-button color="primary">Detalle</button>
+                            <button class="btn btn-danger">Cambiar Estado</button>
                         </td>
                     </tr>
                 </tbody>

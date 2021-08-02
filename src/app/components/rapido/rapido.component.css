@@ -1,0 +1,10 @@
+.mat-success {
+    background-color: #155724;
+    color: #fff;
+}
+
+.total {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

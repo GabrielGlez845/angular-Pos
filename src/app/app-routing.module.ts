@@ -10,6 +10,9 @@ import { MonitorComponent } from './components/monitor/monitor.component';
 import { CorteComponent } from './components/corte/corte.component';
 import { DetalleComponent } from './pages/detalle/detalle.component';
 import { CapturaComponent } from './pages/captura/captura.component';
+import { ArticulosComponent } from './components/articulos/articulos.component';
+import { PlatillosComponent } from './components/platillos/platillos.component';
+import { InsumosComponent } from './components/insumos/insumos.component';
 
 const routes: Routes = [  
     { path: "inicio",component: InicioComponent},
@@ -20,8 +23,12 @@ const routes: Routes = [
     { path: "consultar",component: ConsultaComponent},
     { path: "monitor",component: MonitorComponent},
     { path: "corte",component: CorteComponent},
-    { path: "detalle",component: DetalleComponent},
-    { path: "captura",component: CapturaComponent},
+    { path: "detalle/:id",component: DetalleComponent},
+    { path: "captura/:id",component: CapturaComponent},
+
+    { path: "articulos",component: ArticulosComponent},
+    { path: "platillos",component: PlatillosComponent},
+    { path: "insumos",component: InsumosComponent},
     { path:"**", component:InicioComponent },
     { path: "", pathMatch: "full", redirectTo: "inicio" }
 ];
@@ -31,3 +38,6 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+//Diseños de inventarios, sin fotos , habilitar funciones de monitor, habilitar fuciones de los inventarios
+// terminar comedor para pagar e imprimir ticket

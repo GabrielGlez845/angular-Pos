@@ -13,6 +13,13 @@
     margin-top: 2%;
 }
 
+.flotante {
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    height: 50px;
+}
+
 .contenedor {
     width: 90px;
     height: 240px;
@@ -27,12 +34,4 @@
     right: 1rem;
     bottom: 2rem;
     position: fixed;
-}
-
-.t-responsive {
-    overflow-x: auto;
-}
-
-table {
-    min-width: 500px;
 }
