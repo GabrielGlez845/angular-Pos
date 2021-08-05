@@ -34,8 +34,12 @@ export class PosService {
     }
  
     //Comedor
-    obtenerCuentasNoPagadas(turno:Number){
-     return this.http.get(`${this.api}/comedor/turno/${turno}`);
+    obtenerCuentasId(id:number){
+      return this.http.get(`${this.api}/comedor/cuenta/id/${id}`);
+     }
+
+    obtenerCuentasNoPagadas(turno:Number,seccion:string){
+     return this.http.get(`${this.api}/comedor/turno/${turno}/seccion/${seccion}`);
     }
  
     obtenerDetalleCuenta(cuenta:Number){
@@ -57,6 +61,10 @@ export class PosService {
     actualizarDetalleCuenta(id:Number,cantidad:Number,descuento:String){
      return this.http.put(`${this.api}/comedor/cuenta`,{id:id,cantidad:cantidad,descuento:descuento});
     }
+
+    actualizarCuentaTotal(id:Number,total:Number){
+      return this.http.put(`${this.api}/comedor/cuenta/total`,{id:id,total:total});
+     }
  
     borrarDetalleCuenta(cuenta:number[]){
      return this.http.post(`${this.api}/comedor/cuenta/borrar`,cuenta);
@@ -67,7 +75,10 @@ export class PosService {
     }
  
     //Plataforma
-    //De momento no manejamos clientes
+    
+    obtenerClienteId(id:number){
+      return this.http.get(`${this.api}/plataforma/cliente/${id}`);
+    }
  
     //Rapido
     obtenerPlatillos(){
@@ -110,7 +121,7 @@ export class PosService {
      return this.http.get(`${this.api}/consultar/venta/turno/${turno}`);
     }
  
-    obtenerVentasSeccion(turno:Number,seccion:Number){
+    obtenerVentasSeccion(turno:Number,seccion:String){
      return this.http.get(`${this.api}/consultar/venta/seccion/${seccion}/turno/${turno}`);
     }
  
@@ -127,5 +138,5 @@ export class PosService {
     obtenerVentasTurnoCajaPromesa(turno:Number){
      return this.http.get(`${this.api}/caja/turno/${turno}`).toPromise()
     }
- 
+ //Detalles cerrar el modal por medio de ts en detalle modal y plataforma modal
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { InventariosService } from '../../services/inventarios.service';
+import { ArticuloModel } from '../../modelos/articulo.model';
 
 @Component({
   selector: 'app-articulos',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArticulosComponent implements OnInit {
 
-  constructor() { }
+  articulos:any[];
+  articulo:ArticuloModel;
+  constructor(private inventariosService:InventariosService) { }
 
   ngOnInit(): void {
+    this.inventariosService.obtenerArticulo().subscribe((resp:any) =>{
+        console.log(resp);
+        this.articulos=resp;
+    })
+  }
+
+  agregarArticulo(){
+    
   }
 
 }

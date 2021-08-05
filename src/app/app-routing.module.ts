@@ -23,8 +23,8 @@ const routes: Routes = [
     { path: "consultar",component: ConsultaComponent},
     { path: "monitor",component: MonitorComponent},
     { path: "corte",component: CorteComponent},
-    { path: "detalle/:id",component: DetalleComponent},
-    { path: "captura/:id",component: CapturaComponent},
+    { path: "detalle/:id/:tipo",component: DetalleComponent},
+    { path: "captura/:id/:tipo",component: CapturaComponent},
 
     { path: "articulos",component: ArticulosComponent},
     { path: "platillos",component: PlatillosComponent},

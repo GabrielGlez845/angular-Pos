@@ -10,34 +10,34 @@
         </div>
     </section>
 
-    <div class="mdl-tabs__panel is-active" id="tabNewPayment">
+    <!-- <div class="mdl-tabs__panel is-active" id="tabNewPayment">
         <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
-                <div class="full-width panel mdl-shadow--2dp">
-                    <div class="full-width panel-content">
-                        <form>
-                            <div class="mdl-grid">
-                                <div class="mdl-cell mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
+    <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
+        <div class="full-width panel mdl-shadow--2dp">
+            <div class="full-width panel-content">
+                <form>
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
 
-                                    <div class="mdl-textfield mdl-js-textfield">
-                                        <input type="date" class="mdl-textfield__input">
-                                    </div>
-                                    <div class="mdl-textfield mdl-js-textfield">
-                                        <select class="mdl-textfield__input">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input type="date" class="mdl-textfield__input">
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <select class="mdl-textfield__input">
                                             <option value="" disabled="" selected="">Turno</option>
                                             <option value="">Active</option>
                                             <option value="">deactivated</option>
                                         </select>
-                                    </div>
-                                </div>
                             </div>
-                            <button mat-raised-button color="primary">Ventas</button>
-                        </form>
+                        </div>
                     </div>
-                </div>
+                    <button mat-raised-button color="primary">Ventas</button>
+                </form>
             </div>
         </div>
     </div>
+    </div>
+    </div>-->
     <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
 
@@ -53,17 +53,17 @@
                     <tr>
                         <td class="mdl-data-table__cell--non-numeric">1</td>
                         <td>Comedor</td>
-                        <td>$0.00</td>
+                        <td>$ {{comedor}}</td>
                     </tr>
                     <tr>
                         <td class="mdl-data-table__cell--non-numeric">2</td>
                         <td>Plataforma</td>
-                        <td>$0.00</td>
+                        <td>$ {{plataforma}}</td>
                     </tr>
                     <tr>
                         <td class="mdl-data-table__cell--non-numeric">3</td>
                         <td>Rapido</td>
-                        <td>$0.00</td>
+                        <td>$ {{rapido}}</td>
                     </tr>
                 </tbody>
             </table>

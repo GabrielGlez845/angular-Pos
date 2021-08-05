@@ -13,6 +13,7 @@ import { CuentaDetalleModel } from '../../modelos/cuenta.model';
 })
 export class CapturaComponent implements OnInit {
 cuenta_id:number;
+tipo:number;
   platillos:any[]=[];
   listaPlatillos:PlatilloModel[]=[];
   //cantidad:any[]=[];
@@ -24,6 +25,7 @@ cuenta_id:number;
       this.route.params.subscribe(data => {
       //console.log(data.id)
       this.cuenta_id = data.id;
+      this.tipo = data.tipo;
   });
    }
 
@@ -32,7 +34,7 @@ cuenta_id:number;
   }
 
   Regresar(){
-    this.router.navigate([`/detalle/${this.cuenta_id}`]);
+    this.router.navigate([`/detalle/${this.cuenta_id}/${this.tipo}`]);
   }
 
   obtenerPlatillos(){

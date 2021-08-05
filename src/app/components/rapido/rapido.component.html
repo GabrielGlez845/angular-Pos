@@ -18,7 +18,7 @@
 
                             </div>
                             <div class="col-xl-2 col-lg-4 col-sm-6">
-                                <button class="boton mdl-button" mat-raised-button color="success">Pagar cuenta</button>
+                                <button class="boton mdl-button" data-toggle="modal" data-target="#exampleModalPagar" mat-raised-button color="success">Pagar cuenta</button>
                             </div>
                         </div>
                     </div>
@@ -32,26 +32,27 @@
                                 <table class="table mdl-shadow--2dp mdl-js-data-table">
                                     <thead>
                                         <tr>
-                                            <th>No.Cuenta</th>
-                                            <th>Estado</th>
+                                            <th class="mdl-data-table__cell--non-numeric">Cantidad</th>
+                                            <th>Descripcion</th>
+                                            <th>Importe</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th>1</th>
-                                            <td>Jacob</td>
+                                        <tr *ngFor="let platillo of listaPlatillos">
+                                            <th class="mdl-data-table__cell--non-numeric">{{platillo.cantidad}}</th>
+                                            <td>{{platillo.nombre}}</td>
+                                            <td>${{platillo.precio_venta}}</td>
                                             <td>
-                                                detalle
+                                                <button class="btn btn-danger mr-1" (click)="borrarPlatillo(platillo)">Borrar</button>
                                             </td>
                                         </tr>
-
                                     </tbody>
                                 </table>
                                 <hr>
                                 <div class="total">
                                     <h5 class="last">Total:</h5>
-                                    <button mat-raised-button color="primary">Confirmar cuenta</button>
+
                                 </div>
                             </div>
                         </div>
@@ -59,67 +60,23 @@
                     <div class="full-width text-center col-lg-8" style="padding: 30px 0;">
                         <nav class="full-width menu-categories mb-3">
                             <ul class="list-unstyle text-center">
-                                <li><a href="#!">Category 1</a></li>
-                                <li><a href="#!">Category 2</a></li>
-                                <li><a href="#!">Category 3</a></li>
-                                <li><a href="#!">Category 4</a></li>
+                                <li><a href="#!">Favoritos</a></li>
+                                <li><a href="#!">Alimentos</a></li>
+                                <li><a href="#!">Bebidas</a></li>
+                                <li><a href="#!">Categorias</a></li>
                             </ul>
                         </nav>
-                        <div class="mdl-card mdl-shadow--2dp full-width product-card">
+                        <div class="mdl-card mdl-shadow--2dp full-width product-card cursor" *ngFor="let platillo of platillos" (click)="agregarPlatillo(platillo)">
                             <div class="mdl-card__title">
                                 <img src="assets/img/fontLogin.jpg" alt="product" class="img-responsive">
                             </div>
                             <div class="mdl-card__supporting-text">
                                 <small>Stock</small><br>
-                                <small>Category</small>
+                                <small>Category</small><br>
+                                <small>${{platillo.precio_venta}}</small>
                             </div>
                             <div class="mdl-card__actions mdl-card--border">
-                                Product name
-                                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                                    <i class="zmdi zmdi-more"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="mdl-card mdl-shadow--2dp full-width product-card">
-                            <div class="mdl-card__title">
-                                <img src="assets/img/fontLogin.jpg" alt="product" class="img-responsive">
-                            </div>
-                            <div class="mdl-card__supporting-text">
-                                <small>Stock</small><br>
-                                <small>Category</small>
-                            </div>
-                            <div class="mdl-card__actions mdl-card--border">
-                                Product name
-                                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                                    <i class="zmdi zmdi-more"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="mdl-card mdl-shadow--2dp full-width product-card">
-                            <div class="mdl-card__title">
-                                <img src="assets/img/fontLogin.jpg" alt="product" class="img-responsive">
-                            </div>
-                            <div class="mdl-card__supporting-text">
-                                <small>Stock</small><br>
-                                <small>Category</small>
-                            </div>
-                            <div class="mdl-card__actions mdl-card--border">
-                                Product name
-                                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                                    <i class="zmdi zmdi-more"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="mdl-card mdl-shadow--2dp full-width product-card">
-                            <div class="mdl-card__title">
-                                <img src="assets/img/fontLogin.jpg" alt="product" class="img-responsive">
-                            </div>
-                            <div class="mdl-card__supporting-text">
-                                <small>Stock</small><br>
-                                <small>Category</small>
-                            </div>
-                            <div class="mdl-card__actions mdl-card--border">
-                                Product name
+                                {{platillo.nombre}}
                                 <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="zmdi zmdi-more"></i>
                                 </button>
@@ -132,3 +89,46 @@
         </div>
     </div>
 </section>
+
+<!-- Modal Pagar -->
+<div class="modal fade" id="exampleModalPagar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Pagar cuenta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <form autocomplete="off" [formGroup]="PagarDepositoFormGroup" (ngSubmit)="pagarCuenta()">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Tipo:</label>
+                        <select class="form-control form-control-sm" formControlName="tipo" [class.is-invalid]="tipoNovalido">
+                            <option>Efectivo</option>
+                            <option>Tarjeta</option>
+                        </select>
+                        <small *ngIf=" tipoNovalido" class="text-danger">
+                            Este cuadro no puede estar vacio
+                          </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Importe:</label>
+                        <input type="text" class="form-control" [value]="'$ '+ total" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Cantidad:</label>
+                        <input type="text" class="form-control" formControlName="cantidad">
+                        <small *ngIf="cantidadNovalido" class="text-danger">
+                            solo numeros positivos
+                          </small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" (click)="pagarCuenta()" data-dismiss="modal" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>

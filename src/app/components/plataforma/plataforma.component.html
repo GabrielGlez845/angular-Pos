@@ -17,24 +17,53 @@
                     <tr>
                         <th class="mdl-data-table__cell--non-numeric">No.Cuenta</th>
                         <th>Estado</th>
-                        <th>Cliente</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="mdl-data-table__cell--non-numeric">1</td>
-                        <td>Jacob</td>
-                        <td>Jacob</td>
-                        <td> <button mat-raised-button color="primary" (click)="verDetalle()">Detalle</button></td>
+                    <tr *ngFor="let cuenta of cuentas">
+                        <td class="mdl-data-table__cell--non-numeric">{{cuenta.id}}</td>
+                        <td>Sin pagar</td>
+                        <td> <button mat-raised-button color="primary" (click)="verDetalle(cuenta.id)">Detalle</button></td>
                     </tr>
                 </tbody>
             </table>
             <div class="example-button-container contenedor">
-                <button mat-fab color="primary" class="botonF1">
+                <button mat-fab color="primary" class="botonF1" data-toggle="modal" data-target="#exampleModalCliente">
                     <mat-icon>add circle icon</mat-icon>
                  </button>
             </div>
         </div>
     </div>
 </section>
+
+<!-- Modal agregar cliente -->
+<div class="modal fade" id="exampleModalCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Seleccionar cliente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <form autocomplete="off" [formGroup]="ClienteFormGroup" (ngSubmit)="seleccionarCliente()">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Cliente:</label>
+                        <select class="form-control form-control-sm" formControlName="cliente" [class.is-invalid]="clienteNovalido">    
+                            <option >Cliente General Prueba</option>
+                        </select>
+                        <small *ngIf=" clienteNovalido" class="text-danger">
+                           Seleccionar cliente
+                          </small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" (click)="seleccionarCliente()" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>

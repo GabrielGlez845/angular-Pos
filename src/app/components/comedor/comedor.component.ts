@@ -36,14 +36,14 @@ export class ComedorComponent implements OnInit {
   }
 
   cuentasSinPagar(){
-    this.servicioPos.obtenerCuentasNoPagadas(this.turno_id).subscribe((resp:any)=>{
+    this.servicioPos.obtenerCuentasNoPagadas(this.turno_id,'Comedor').subscribe((resp:any)=>{
       console.log(resp)
       this.cuentas = resp;
     })
   }
   // Detalle page
   verDetalle(cuenta:number){
-    this.router.navigate(['/detalle',cuenta]);
+    this.router.navigate(['/detalle',cuenta,'comedor']);
   }
 
  
