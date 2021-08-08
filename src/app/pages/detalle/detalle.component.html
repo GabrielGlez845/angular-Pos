@@ -4,7 +4,7 @@
             <button class="boton" (click)="Capturar()" mat-raised-button>Capturar</button>
             <button class="boton" mat-raised-button>Desc gnral</button>
             <button class="boton" mat-raised-button>Dividir cuenta</button>
-            <button class="boton" data-toggle="modal" data-target="#exampleModalPagar" mat-raised-button>Pagar cuenta</button>
+            <button class="boton" (click)="open(content)" mat-raised-button>Pagar cuenta</button>
             <button class="boton" (click)="imprimirCuenta()" mat-raised-button>Imprimir cuenta</button>
             <button class="boton" (click)="Regresar()" mat-raised-button color="warn">Regresar</button>
         </div>
@@ -51,28 +51,29 @@
                 <div class="mt-5">
                     <h5>Cliente</h5>
                 </div>
-                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width">
-                    <thead>
-                        <tr>
-                            <th class="mdl-data-table__cell--non-numeric">Nombre</th>
-                            <th>Apellido</th>
-                            <th>Calle</th>
-                            <th>Codigo P.</th>
-                            <th>Telefono</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let cliente of clientes">
-                            <td class="mdl-data-table__cell--non-numeric">{{cliente.nombre}}</td>
-                            <td>{{cliente.apellido}}</td>
-                            <td>{{cliente.calle}}</td>
-                            <td> {{cliente.colonia}}</td>
-                            <td> {{cliente.CP}}</td>
-                            <td> {{cliente.telefono}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-
+                <div class="t-responsive">
+                    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width">
+                        <thead>
+                            <tr>
+                                <th class="mdl-data-table__cell--non-numeric">Nombre</th>
+                                <th>Apellido</th>
+                                <th>Calle</th>
+                                <th>Codigo P.</th>
+                                <th>Telefono</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let cliente of clientes">
+                                <td class="mdl-data-table__cell--non-numeric">{{cliente.nombre}}</td>
+                                <td>{{cliente.apellido}}</td>
+                                <td>{{cliente.calle}}</td>
+                                <td> {{cliente.colonia}}</td>
+                                <td> {{cliente.CP}}</td>
+                                <td> {{cliente.telefono}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="example-button-container contenedor">
@@ -85,44 +86,42 @@
 </section>
 
 <!-- Modal Pagar -->
-<div class="modal fade" id="exampleModalPagar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Pagar cuenta</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<ng-template #content let-modal>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Pagar cuenta</h5>
+            <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-            </div>
-            <div class="modal-body">
-                <form autocomplete="off" [formGroup]="PagarDepositoFormGroup" (ngSubmit)="pagarCuenta()">
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Tipo:</label>
-                        <select class="form-control form-control-sm" formControlName="tipo" [class.is-invalid]="tipoNovalido">
+        </div>
+        <div class="modal-body">
+            <form autocomplete="off" [formGroup]="PagarDepositoFormGroup" (ngSubmit)="pagarCuenta()">
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Tipo:</label>
+                    <select class="form-control form-control-sm" formControlName="tipo" [class.is-invalid]="tipoNovalido">
                             <option>Efectivo</option>
                             <option>Tarjeta</option>
                         </select>
-                        <small *ngIf=" tipoNovalido" class="text-danger">
+                    <small *ngIf=" tipoNovalido" class="text-danger">
                             Este cuadro no puede estar vacio
                           </small>
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Importe:</label>
-                        <input type="text" class="form-control" [value]="'$ '+ importe" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Cantidad:</label>
-                        <input type="text" class="form-control" formControlName="cantidad">
-                        <small *ngIf="cantidadNovalido" class="text-danger">
+                </div>
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Importe:</label>
+                    <input type="text" class="form-control" [value]="'$ '+ importe" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Cantidad:</label>
+                    <input type="text" class="form-control" formControlName="cantidad">
+                    <small *ngIf="cantidadNovalido" class="text-danger">
                             solo numeros positivos
                           </small>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" (click)="pagarCuenta()" data-dismiss="modal" class="btn btn-primary">Aceptar</button>
-            </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="modal.close()">Cerrar</button>
+            <button type="button" (click)="pagarCuenta()" class="btn btn-primary">Aceptar</button>
         </div>
     </div>
-</div>
+</ng-template>

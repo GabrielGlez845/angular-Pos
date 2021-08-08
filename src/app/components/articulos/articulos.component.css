@@ -35,3 +35,14 @@
     bottom: 2rem;
     position: fixed;
 }
+
+
+/*tabla responsive*/
+
+.t-responsive {
+    overflow-x: auto;
+}
+
+table {
+    min-width: 500px;
+}

@@ -4,6 +4,7 @@ import { PosService } from '../../services/pos.service';
 import Swal from 'sweetalert2'
 import { CuentaModel } from '../../modelos/cuenta.model';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-plataforma',
   templateUrl: './plataforma.component.html',
@@ -15,10 +16,11 @@ export class PlataformaComponent implements OnInit {
   cuentas:any[];
   cuenta:CuentaModel;
   ClienteFormGroup: FormGroup;
-
+  modal : NgbModalRef;
   constructor(private router:Router,
               private servicioPos: PosService,
-              private _formBuilder: FormBuilder) {
+              private _formBuilder: FormBuilder,
+              private modalService: NgbModal) {
                 this.ultimoTurno();
                  //Cliente
                  this.ClienteFormGroup = this._formBuilder.group({
@@ -99,6 +101,7 @@ export class PlataformaComponent implements OnInit {
         title: '',
         text: 'Nueva cuenta creada'
       });
+      this.modal.close();
     }).catch((err)=>{
       Swal.fire({
         icon: 'error',
@@ -106,5 +109,9 @@ export class PlataformaComponent implements OnInit {
         text: 'Error '
       });
     })
+  }
+
+  open(content:any) {
+    this.modal = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'})
   }
 }

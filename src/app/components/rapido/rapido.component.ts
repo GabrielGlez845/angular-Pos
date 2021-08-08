@@ -3,8 +3,8 @@ import Swal from 'sweetalert2'
 import { PlatilloModel } from '../../modelos/platillo.model';
 import { PosService } from '../../services/pos.service';
 import { InventariosService } from '../../services/inventarios.service';
-import { CuentaDetalleModel } from '../../modelos/cuenta.model';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { MovimientosModel } from '../../modelos/movimiento.model';
 @Component({
   selector: 'app-rapido',
@@ -13,14 +13,17 @@ import { MovimientosModel } from '../../modelos/movimiento.model';
 })
 export class RapidoComponent implements OnInit {
   platillos:any[]=[];
-  listaPlatillos:PlatilloModel[]=[];
-  total:number;
+  //listaPlatillos:PlatilloModel[]=[];
+  listaPlatillos:any[]=[];
+  total:number = 0;
   PagarDepositoFormGroup: FormGroup;
   movimiento : MovimientosModel;
   turno_id:number;
+  modal : NgbModalRef;
   constructor( private servicioPos:PosService,
                private service_inventaio:InventariosService,
-               private _formBuilder: FormBuilder) {
+               private _formBuilder: FormBuilder,
+               private modalService: NgbModal) {
                  //Retiro Deposito
                  this.PagarDepositoFormGroup = this._formBuilder.group({
                   tipo: ['', [Validators.required]],
@@ -37,6 +40,7 @@ export class RapidoComponent implements OnInit {
   }
   ngOnInit(): void {
     this.obtenerPlatillos();
+    this.ultimoTurno();
   }
 
   ultimoTurno(){
@@ -52,7 +56,7 @@ export class RapidoComponent implements OnInit {
     })
   }
 
-  agregarPlatillo(platillo: PlatilloModel){
+  agregarPlatillo(platillo: any){
     //Saber la cantidad y emitirla
     let objIndex = this.listaPlatillos.findIndex((obj => obj.producto_id == platillo.producto_id));
     if(objIndex != -1)
@@ -68,7 +72,7 @@ export class RapidoComponent implements OnInit {
     this.total = this.listaPlatillos.reduce((sum, current) => sum + ((parseInt(current.precio_venta) * current.cantidad)), 0);  
   }
 
-  borrarPlatillo(platillo: PlatilloModel){
+  borrarPlatillo(platillo: any){
     if(platillo.cantidad <= 1){
       let objIndex = this.listaPlatillos.findIndex((obj => obj.producto_id == platillo.producto_id));
       this.listaPlatillos.splice(objIndex,1);
@@ -81,11 +85,6 @@ export class RapidoComponent implements OnInit {
 
   pagarCuenta(){
     if (this.PagarDepositoFormGroup.invalid) {
-      Swal.fire({
-        icon: 'error',
-        title: '',
-        text: 'Error en campos del formulario'
-      });
       return Object.values( this.PagarDepositoFormGroup.controls).forEach(control => {
        if (control instanceof FormGroup ) {
         Object.values( control.controls).forEach(control => control.markAsTouched());
@@ -119,14 +118,13 @@ export class RapidoComponent implements OnInit {
               title: '',
               text: 'Cuenta pagada'
             });
-          }).catch(()=>{
-            Swal.fire({
-              icon: 'error',
-              title: '',
-              text: 'error'
-            });
+            this.modal.close();
           })
     }
   }
+
+  open(content:any) {
+    this.modal = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'})
+  }
 }
-//revisar funcionalidad de rapido
+

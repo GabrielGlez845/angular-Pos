@@ -15,7 +15,8 @@ export class CapturaComponent implements OnInit {
 cuenta_id:number;
 tipo:number;
   platillos:any[]=[];
-  listaPlatillos:PlatilloModel[]=[];
+  //listaPlatillos:PlatilloModel[]=[];
+  listaPlatillos:any[]=[];
   //cantidad:any[]=[];
   total:number;
   constructor(private route:ActivatedRoute,
@@ -44,7 +45,7 @@ tipo:number;
     })
   }
 
-  agregarPlatillo(platillo: PlatilloModel){
+  agregarPlatillo(platillo: any){
     //Saber la cantidad y emitirla
     let objIndex = this.listaPlatillos.findIndex((obj => obj.producto_id == platillo.producto_id));
     if(objIndex != -1)
@@ -60,7 +61,7 @@ tipo:number;
     this.total = this.listaPlatillos.reduce((sum, current) => sum + ((parseInt(current.precio_venta) * current.cantidad)), 0);  
   }
 
-  borrarPlatillo(platillo: PlatilloModel){
+  borrarPlatillo(platillo: any){
     if(platillo.cantidad <= 1){
       let objIndex = this.listaPlatillos.findIndex((obj => obj.producto_id == platillo.producto_id));
       this.listaPlatillos.splice(objIndex,1);
@@ -88,7 +89,7 @@ tipo:number;
     text: 'Productos agregados'
   });
     
-    this.router.navigate([`/detalle/${this.cuenta_id}`]);
+    this.router.navigate([`/detalle/${this.cuenta_id}/${this.tipo}`]);
   }
 }
 

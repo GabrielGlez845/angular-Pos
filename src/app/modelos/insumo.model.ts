@@ -11,7 +11,7 @@ export class InsumoModel {
     img: string = ""; //-->colocar una imagen pra nulo
     stock_minimo: number = 0;
     stock_maximo: number = 0; 
-    visible?: number = 1;//el default lo maneja la bd// bit 1 o 0
+    visible: number = 1;//el default lo maneja la bd// bit 1 o 0
     existencia: number = 0;
     producto_id:number = 0;   
 

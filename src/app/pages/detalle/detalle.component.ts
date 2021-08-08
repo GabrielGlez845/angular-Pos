@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PosService } from '../../services/pos.service';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-import Swal from 'sweetalert2'
 import { MovimientosModel } from '../../modelos/movimiento.model';
-
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-detalle',
@@ -27,10 +27,12 @@ export class DetalleComponent implements OnInit {
   bandera:boolean;
   regresartipo:string;
   clientes:any[];
+  modal : NgbModalRef;
   constructor(private router:Router,
               private route:ActivatedRoute,
               private servicioPos:PosService,
-              private _formBuilder: FormBuilder) {
+              private _formBuilder: FormBuilder,
+              private modalService: NgbModal) {
     this.route.params.subscribe(data => {
       this.cuenta_id = data['id'];
       if (data['tipo'] === 'plataforma') {
@@ -149,11 +151,6 @@ export class DetalleComponent implements OnInit {
 
   pagarCuenta(){
     if (this.PagarDepositoFormGroup.invalid) {
-      Swal.fire({
-        icon: 'error',
-        title: '',
-        text: 'Error en campos del formulario'
-      });
       return Object.values( this.PagarDepositoFormGroup.controls).forEach(control => {
        if (control instanceof FormGroup ) {
         Object.values( control.controls).forEach(control => control.markAsTouched());
@@ -194,6 +191,7 @@ export class DetalleComponent implements OnInit {
                 title: '',
                 text: 'Cuenta pagada'
               });
+              this.modal.close();
               
           }).catch((error)=>{
             Swal.fire({
@@ -204,6 +202,10 @@ export class DetalleComponent implements OnInit {
           })
       })
     }
+  }
+
+  open(content:any) {
+    this.modal = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'})
   }
 
   imprimirCuenta(){

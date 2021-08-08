@@ -9,7 +9,7 @@ export class PlatilloModel {
     visible: number = 0;//el default lo maneja la bd
     existencia: number = 0;
     producto_id:number = 0;   
-    cantidad:number = 0;//--> Quitar
+  //  cantidad:number = 0;//--> Quitar
 
 }
 

@@ -138,5 +138,5 @@ export class PosService {
     obtenerVentasTurnoCajaPromesa(turno:Number){
      return this.http.get(`${this.api}/caja/turno/${turno}`).toPromise()
     }
- //Detalles cerrar el modal por medio de ts en detalle modal y plataforma modal
+ //Detalles cerrar el modal por medio de ts en plataforma modal tambien revisar rapido
 }

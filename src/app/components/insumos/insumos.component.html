@@ -12,30 +12,190 @@
     <div class="full-width divider-menu-h mb-5"></div>
     <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
-            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width">
-                <thead>
-                    <tr>
-                        <th class="mdl-data-table__cell--non-numeric">Entradas</th>
-                        <th>Salidas</th>
-                        <th>opciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="mdl-data-table__cell--non-numeric">100</td>
-                        <td>100</td>
-                        <td>
-                            <button class="boton" mat-raised-button>Editar</button>
-                            <button class="boton" mat-raised-button color="warn">Eliminar</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="t-responsive">
+                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width">
+                    <thead>
+                        <tr>
+                            <th class="mdl-data-table__cell--non-numeric">Nombre</th>
+                            <th>Categoria</th>
+                            <th>Departamento</th>
+                            <th>Factor</th>
+                            <th>Precio de compra</th>
+                            <th>Precio de venta</th>
+                            <th>Stock minimo</th>
+                            <th>Stock maximo</th>
+                            <th>Unidad de compra</th>
+                            <th>Unidad de consumo</th>
+                            <th>Existacia</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let insumo of insumos">
+                            <td class="mdl-data-table__cell--non-numeric">{{insumo.nombre}}</td>
+                            <td>{{insumo.categoria_id}}</td>
+                            <td>{{insumo.departamento_id}}</td>
+                            <td>{{insumo.factor}}</td>
+                            <td>{{insumo.precio_compra}}</td>
+                            <td>{{insumo.precio_venta}}</td>
+                            <td>{{insumo.stock_minimo}}</td>
+                            <td>{{insumo.stock_maximo}}</td>
+                            <td>{{insumo.unidad_compra}}</td>
+                            <td>{{insumo.unidad_consumo}}</td>
+                            <td>{{insumo.existencia}}</td>
+                            <td>
+                                <button class="boton" mat-raised-button color="warn" (click)="eliminarInsumo(insumo.id)">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <div class="example-button-container contenedor">
-                <button mat-fab color="primary" class="botonF1">
+                <button (click)="open(content)" mat-fab color="primary" class="botonF1">
                     <mat-icon>add circle icon</mat-icon>
                  </button>
             </div>
         </div>
     </div>
+
+    <ng-template #content let-modal>
+        <div class="modal-header">
+            <h5 class="modal-title" id="modal-basic-title">Agregar insumo</h5>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form autocomplete="off" [formGroup]="InsumoFormGroup" (ngSubmit)="agregarInsumo()">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Nombre:</label>
+                            <input type="text" class="form-control" formControlName="nombre" [class.is-invalid]="nombreNovalido">
+                            <small *ngIf="nombreNovalido" class="text-danger">
+                                    nombre no valido
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Categoria:</label>
+                            <select class="form-control form-control-sm" formControlName="categoria" [class.is-invalid]="categoriaNovalida">
+                                    <option>Categoria 1</option>
+                                    <option>Categoria 2</option>
+                            </select>
+                            <small *ngIf=" categoriaNovalida" class="text-danger">
+                                    Este cuadro no puede estar vacio
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Departamento:</label>
+                            <select class="form-control form-control-sm" formControlName="departamento" [class.is-invalid]="departamentoNovalido">
+                                    <option>Departamento 1</option>
+                                    <option>Departamento 2</option>
+                            </select>
+                            <small *ngIf="departamentoNovalido" class="text-danger">
+                                    Este cuadro no puede estar vacio
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Unidad de compra:</label>
+                            <select class="form-control form-control-sm" formControlName="unidad_compra" [class.is-invalid]="unidadCompraNovalida">
+                                    <option>pieza</option>
+                                    <option>Departamento 2</option>
+                                </select>
+                            <small *ngIf="unidadCompraNovalida" class="text-danger">
+                                    Este cuadro no puede estar vacio
+                                  </small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Unidad de consumo:</label>
+                            <select class="form-control form-control-sm" formControlName="unidad_consumo" [class.is-invalid]="unidadConsumoNovalida">
+                                    <option>pieza</option>
+                                    <option>Departamento 2</option>
+                                </select>
+                            <small *ngIf="unidadConsumoNovalida" class="text-danger">
+                                    Este cuadro no puede estar vacio
+                                  </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Stock minimo:</label>
+                            <input type="number" class="form-control" formControlName="stock_minimo" [class.is-invalid]="stockMinimo">
+                            <small *ngIf="stockMinimo" class="text-danger">
+                                   opcion no valida
+                                  </small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Stock maximo:</label>
+                            <input type="number" class="form-control" formControlName="stock_maximo" [class.is-invalid]="stockMaximo">
+                            <small *ngIf="stockMaximo" class="text-danger">
+                                   opcion no valida
+                                  </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Precio de compra:</label>
+                            <input type="number" class="form-control" formControlName="precio_compra" [class.is-invalid]="precioCompraNovalida">
+                            <small *ngIf="precioCompraNovalida" class="text-danger">
+                                    solo numeros positivos
+                                  </small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Precio de venta:</label>
+                            <input type="number" class="form-control" formControlName="precio_venta" [class.is-invalid]="precioVentaNovalida">
+                            <small *ngIf="precioVentaNovalida" class="text-danger">
+                                    solo numeros positivos
+                                  </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Factor:</label>
+                            <input type="number" class="form-control" formControlName="factor" [class.is-invalid]="factorNovalido">
+                            <small *ngIf="factorNovalido" class="text-danger">
+                                solo numeros positivos
+                              </small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Existencia:</label>
+                            <input type="number" class="form-control" formControlName="existencia" [class.is-invalid]="existenciaNovalida">
+                            <small *ngIf="existenciaNovalida" class="text-danger">
+                                solo numeros positivos
+                              </small>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="modal.close()">Cerrar</button>
+            <button type="button" class="btn btn-primary" (click)="agregarInsumo()">Aceptar</button>
+        </div>
+    </ng-template>
+
 </section>

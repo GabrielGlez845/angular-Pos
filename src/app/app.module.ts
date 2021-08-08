@@ -25,7 +25,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 
 //Graficas
 //import { ChartsModule } from 'ng2-charts';
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 //Componentes
 import { DetalleComponent } from './pages/detalle/detalle.component';
@@ -64,7 +64,8 @@ import { InsumosComponent } from './components/insumos/insumos.component';
     MatIconModule,
     MatTabsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
  //   ChartsModule
   ],
   providers: [],

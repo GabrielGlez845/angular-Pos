@@ -74,6 +74,8 @@ export class ComedorComponent implements OnInit {
           title: '',
           text: 'Nueva cuenta creada'
         });
+    },err=>{
+      console.log(err)
     })
   }
 
